@@ -84,7 +84,10 @@ const DrawCanvas = ({ model, goBack }) => {
         <div className="relative bg-gray-700 h-screen w-screen flex flex-col items-center justify-end">
             <BsArrowLeftShort className="bg-teal-400 text-black text-3xl rounded-full 
             absolute left-3 top-3 border border-black cursor-pointer" onClick={goBack} />
-            <h1 className='mb-6 text-8xl text-white'>{predicted && predicted.top[0] + " score:" + predicted.top[1]}</h1>
+            {predicted && <div className="mb-6 flex flex-col items-center">
+                <h1 className="mb-2"><span className='text-7xl text-white'>{predicted.top[0]}</span><span className="text-3xl text-white">{" (" + predicted.top[1] + "%)"}</span></h1>
+                <h1><span className='text-2xl text-gray-400'>{predicted.alt[0]}</span><span className="text-sm text-gray-400">{" (" + predicted.alt[1] + "%)"}</span></h1>
+            </div>}
             <div className='relative mb-2'>
                 <canvas
                 ref={canvasRef}
