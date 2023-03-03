@@ -1,6 +1,7 @@
 import { BsArrowLeftShort } from "react-icons/bs";
 import React, { useRef, useEffect, useState } from 'react';
 import { BsEraser } from 'react-icons/bs';
+// site: https://miickii.github.io/srp-frontend/
 
 let grid = Array(784).fill(0)
 
@@ -64,7 +65,7 @@ const DrawCanvas = ({ model, goBack }) => {
     const predict = async () => {
         // https://flask-production-19b6.up.railway.app/predict
         // api/predict
-        const response = await fetch("https://flask-production-19b6.up.railway.app/predict", {
+        const response = await fetch("https://cors-anywhere.herokuapp.com/https://flask-production-19b6.up.railway.app/predict", {
             method: 'POST',
             body: JSON.stringify({
                 doodle: model===1, 
