@@ -65,7 +65,7 @@ const DrawCanvas = ({ model, goBack }) => {
     const predict = async () => {
         // https://flask-production-19b6.up.railway.app/predict
         // api/predict
-        const response = await fetch("https://cors-anywhere.herokuapp.com/https://flask-production-19b6.up.railway.app/predict", {
+        const response = await fetch("https://flask-production-19b6.up.railway.app/predict", {
             method: 'POST',
             body: JSON.stringify({
                 doodle: model===1, 
