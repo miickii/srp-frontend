@@ -6,7 +6,7 @@ function App() {
   const [model, setModel] = useState(0);
   return (
     <div className="App">
-      {home && <div className="relative bg-gray-700 h-screen w-screen flex items-center justify-center">
+      {home && <div className="relative h-screen w-screen flex items-center justify-center">
         <button className='rounded-lg bg-teal-400 border-2 border-black px-8 py-3 text-xl mr-10 duration-200 hover:scale-105 hover:bg-teal-500' onClick={() => {
           setModel(0);
           setHome(false);

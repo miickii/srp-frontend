@@ -81,14 +81,16 @@ const DrawCanvas = ({ model, goBack }) => {
     }
 
     return (
-        <div className="relative bg-gray-700 h-screen w-screen flex flex-col items-center justify-end">
+        <div className="relative h-screen w-screen flex flex-col items-center">
             <BsArrowLeftShort className="bg-teal-400 text-black text-3xl rounded-full 
             absolute left-3 top-3 border border-black cursor-pointer" onClick={goBack} />
-            {predicted && <div className="mb-6 flex flex-col items-center">
-                <h1 className="mb-2"><span className='text-7xl text-white'>{predicted.top[0]}</span><span className="text-3xl text-white">{" (" + predicted.top[1] + "%)"}</span></h1>
-                <h1><span className='text-2xl text-gray-400'>{predicted.alt[0]}</span><span className="text-sm text-gray-400">{" (" + predicted.alt[1] + "%)"}</span></h1>
-            </div>}
-            <div className='relative mb-2'>
+            <div className="mt-2 h-[26rem] flex flex-col items-center">
+                {predicted && <>
+                    <h1 className="mb-2"><span className='text-7xl text-white'>{predicted.top[0]}</span><span className="text-3xl text-white">{" (" + predicted.top[1] + "%)"}</span></h1>
+                    <h1><span className='text-2xl text-gray-400'>{predicted.alt[0]}</span><span className="text-sm text-gray-400">{" (" + predicted.alt[1] + "%)"}</span></h1>
+                </>}
+            </div>
+            <div className='relative mt-2'>
                 <canvas
                 ref={canvasRef}
                 className="border-4 border-black rounded-lg shadow-xl"
@@ -99,26 +101,27 @@ const DrawCanvas = ({ model, goBack }) => {
                     <BsEraser size={18}/>
                 </button>
             </div>
-            <button className='rounded-lg bg-teal-400 border-2 border-black px-8 py-3 text-xl mb-14 duration-200 hover:scale-105 hover:bg-teal-500' onClick={() => predict()}>GÆT</button>
-            
-            <div className="w-full flex">
-                <div className="w-[37%] border-b-4 border-black shadow"></div>
-                <div className="w-[26%] pt-2 border-t-4 border-x-4 border-black bg-gray-500 text-center text-3xl text-black underline">Tegn en af følgende:</div>
-                <div className="w-[37%] border-b-4 border-black"></div>
-            </div>
-            <div className="w-full flex bg-gray-500 py-4">
-                {model===1 && 
-                    Object.keys(doodle_labels).map((label, i) => (
-                        <div className="w-full flex justify-center items-center text-white" key={i} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)}>
-                            {hoveredIndex === i ? <span className="text-2xl">{label}</span> : <span className="text-4xl">{doodle_labels[label]}</span>}
-                        </div>
-                    ))
-                }
-                {model===0 &&
-                    digits.map((d) => (
-                        <div className="w-full text-center text-3xl text-gray-200" key={d}>{d}</div>
-                    ))
-                }
+            <button className='rounded-lg bg-teal-400 border-2 border-black px-7 py-2 text-xl mt-6 duration-200 hover:scale-105 hover:bg-teal-500' onClick={() => predict()}>GÆT</button>
+            <div className="h-full w-full flex flex-col justify-end">
+                <div className="w-full flex">
+                    <div className="w-[35%] border-b-4 border-black shadow"></div>
+                    <div className="w-[30%] pt-2 border-t-4 border-x-4 border-black bg-gray-500 text-center text-2xl text-black underline">Tegn en af følgende:</div>
+                    <div className="w-[35%] border-b-4 border-black"></div>
+                </div>
+                <div className="w-full flex bg-gray-500 py-4">
+                    {model===1 && 
+                        Object.keys(doodle_labels).map((label, i) => (
+                            <div className="w-full flex justify-center items-center text-white" key={i} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)}>
+                                {hoveredIndex === i ? <span className="text-2xl">{label}</span> : <span className="text-4xl">{doodle_labels[label]}</span>}
+                            </div>
+                        ))
+                    }
+                    {model===0 &&
+                        digits.map((d) => (
+                            <div className="w-full text-center text-3xl text-gray-200" key={d}>{d}</div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
       );
