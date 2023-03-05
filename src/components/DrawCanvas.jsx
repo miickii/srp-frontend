@@ -12,6 +12,7 @@ const DrawCanvas = ({ model, goBack }) => {
     const doodle_labels = {"Æble": "🍎", "Træ": "🌳", "Pizza": "🍕", "Eiffeltårn": "🗼", "Donut": "🍩", "Fisk": "🐟", "Vinglas": "🍷", "Hund": "🐕", "Smiley": "🙂", "Gulerod": "🥕", "T-shirt": "👕", "Kaktus": "🌵", "Seng": "🛏️"}
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const [doodleModelV, setDoodleModelV] = useState(1);
 
     useEffect(() => {
       const canvas = canvasRef.current;
@@ -80,10 +81,34 @@ const DrawCanvas = ({ model, goBack }) => {
         setPredicted(result);
     }
 
+    const changeDoodleModel = async (newModel) => {
+        setDoodleModelV(newModel);
+        // https://flask-production-19b6.up.railway.app/change-model
+        // api/predict
+        const response = await fetch("https://flask-production-19b6.up.railway.app/change-model", {
+            method: 'POST',
+            body: JSON.stringify({
+                newModel: newModel
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+        const result = await response.json();
+    }
+
     return (
         <div className="relative h-screen w-screen flex flex-col items-center">
             <BsArrowLeftShort className="bg-teal-400 text-black text-3xl rounded-full 
             absolute left-3 top-3 border border-black cursor-pointer" onClick={goBack} />
+            {model==1 && <div className="absolute right-10 top-3 flex flex-col items-center">
+                <h1 className="text-white text-xl">Select Model:</h1>
+                <div className="flex">
+                    <div className={`border-2 border-black px-2 cursor-pointer ${doodleModelV===1 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeDoodleModel(1)}>S</div>
+                    <div className={`border-2 border-black px-2 cursor-pointer ${doodleModelV===2 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeDoodleModel(2)}>M</div>
+                    <div className={`border-2 border-black px-2 cursor-pointer ${doodleModelV===3 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeDoodleModel(3)}>L</div>
+                </div>
+            </div>}
             <div className="mt-2 h-[26rem] flex flex-col items-center">
                 {predicted && <>
                     <h1 className="mb-2"><span className='text-7xl text-white'>{predicted.top[0]}</span><span className="text-3xl text-white">{" (" + predicted.top[1] + "%)"}</span></h1>
