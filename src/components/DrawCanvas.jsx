@@ -85,7 +85,7 @@ const DrawCanvas = ({ model, goBack }) => {
         setModelV(newModel);
         // https://flask-production-19b6.up.railway.app/predict
         // api/predict
-        const response = await fetch("api/change-model", {
+        const response = await fetch("https://flask-production-19b6.up.railway.app/change-model", {
             method: 'POST',
             body: JSON.stringify({
                 digitModel: model===0, 
@@ -97,7 +97,7 @@ const DrawCanvas = ({ model, goBack }) => {
         });
         const result = await response.json();
     }
-
+    
     return (
         <div className="relative h-screen w-screen flex flex-col items-center">
             <BsArrowLeftShort className="bg-teal-400 text-black text-3xl rounded-full 
