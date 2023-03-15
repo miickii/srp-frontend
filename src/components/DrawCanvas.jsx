@@ -102,7 +102,7 @@ const DrawCanvas = ({ model, goBack }) => {
             <BsArrowLeftShort className="bg-teal-400 text-black text-4xl rounded-full 
             absolute left-3 top-3 border border-black cursor-pointer" onClick={goBack} />
             <div className="absolute right-10 top-3 flex flex-col items-center">
-                <h1 className="text-white text-xl">Select Model:</h1>
+                <h1 className="text-white text-xl">Vælg Model:</h1>
                 <div className="flex gap-1">
                     <div className={`border-2 text-lg w-9 h-8 flex justify-center items-center border-black rounded cursor-pointer ${modelV===1 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeModel(1)}>S</div>
                     <div className={`border-2 text-lg w-9 h-8 flex justify-center items-center border-black rounded cursor-pointer ${modelV===2 ? "bg-teal-400" : "bg-gray-300"} ${model===0 && "hidden"}`} onClick={() => changeModel(2)}>M</div>

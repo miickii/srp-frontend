@@ -10,12 +10,12 @@ function App() {
         <button className='rounded-lg bg-teal-400 border-2 border-black px-8 py-3 text-xl mr-10 duration-200 hover:scale-105 hover:bg-teal-500' onClick={() => {
           setModel(0);
           setHome(false);
-        }}>DIGIT</button>
+        }}>CIFFER</button>
 
         <button className='rounded-lg bg-teal-400 border-2 border-black px-8 py-3 text-xl ml-10 duration-200 hover:scale-105 hover:bg-teal-500' onClick={() => {
           setModel(1);
           setHome(false);
-        }}>DOODLE</button>
+        }}>TEGNING</button>
       </div>}
 
       {!home && <DrawCanvas model={model} goBack={() => setHome(true)} />}
