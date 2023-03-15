@@ -9,10 +9,9 @@ const DrawCanvas = ({ model, goBack }) => {
     const canvasRef = useRef(null);
     const [ctx, setCtx] = useState(null);
     const [predicted, setPredicted] = useState(null);
-    const doodle_labels = {"Æble": "🍎", "Træ": "🌳", "Pizza": "🍕", "Eiffeltårn": "🗼", "Donut": "🍩", "Fisk": "🐟", "Vinglas": "🍷", "Hund": "🐕", "Smiley": "🙂", "Gulerod": "🥕", "T-shirt": "👕", "Kaktus": "🌵", "Seng": "🛏️"}
-    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const tegninger = ["Æble", "Træ", "Pizza", "Eiffeltårn", "Donut", "Fisk", "Vinglas", "Hund", "Smiley", "Gulerod", "T-shirt", "Kaktus", "Seng"]
     const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const [modelV, setModelV] = useState(1);
+    const [modelV, setModelV] = useState(3);
 
     useEffect(() => {
       const canvas = canvasRef.current;
@@ -100,14 +99,14 @@ const DrawCanvas = ({ model, goBack }) => {
     
     return (
         <div className="relative h-screen w-screen flex flex-col items-center">
-            <BsArrowLeftShort className="bg-teal-400 text-black text-3xl rounded-full 
+            <BsArrowLeftShort className="bg-teal-400 text-black text-4xl rounded-full 
             absolute left-3 top-3 border border-black cursor-pointer" onClick={goBack} />
             <div className="absolute right-10 top-3 flex flex-col items-center">
                 <h1 className="text-white text-xl">Select Model:</h1>
-                <div className="flex">
-                    <div className={`border-2 border-black px-2 cursor-pointer ${modelV===1 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeModel(1)}>S</div>
-                    <div className={`border-2 border-black px-2 cursor-pointer ${modelV===2 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeModel(2)}>M</div>
-                    <div className={`border-2 border-black px-2 cursor-pointer ${modelV===3 ? "bg-teal-400" : "bg-gray-300"} ${model===0 && "hidden"}`} onClick={() => changeModel(3)}>L</div>
+                <div className="flex gap-1">
+                    <div className={`border-2 text-lg w-9 h-8 flex justify-center items-center border-black rounded cursor-pointer ${modelV===1 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeModel(1)}>S</div>
+                    <div className={`border-2 text-lg w-9 h-8 flex justify-center items-center border-black rounded cursor-pointer ${modelV===2 ? "bg-teal-400" : "bg-gray-300"} ${model===0 && "hidden"}`} onClick={() => changeModel(2)}>M</div>
+                    <div className={`border-2 text-lg w-9 h-8 flex justify-center items-center border-black rounded cursor-pointer ${modelV===3 ? "bg-teal-400" : "bg-gray-300"}`} onClick={() => changeModel(3)}>L</div>
                 </div>
             </div>
             <div className="mt-2 h-[26rem] flex flex-col items-center">
@@ -136,10 +135,8 @@ const DrawCanvas = ({ model, goBack }) => {
                 </div>
                 <div className="w-full flex bg-gray-500 py-4">
                     {model===1 && 
-                        Object.keys(doodle_labels).map((label, i) => (
-                            <div className="w-full flex justify-center items-center text-white" key={i} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)}>
-                                {hoveredIndex === i ? <span className="text-2xl">{label}</span> : <span className="text-4xl">{doodle_labels[label]}</span>}
-                            </div>
+                        tegninger.map((t) => (
+                            <div className="w-full flex justify-center items-center text-gray-200 text-lg" key={t}>{t}</div>
                         ))
                     }
                     {model===0 &&
